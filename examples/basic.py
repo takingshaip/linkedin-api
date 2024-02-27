@@ -1,14 +1,15 @@
-import json
 from linkedin_api import Linkedin
 
-with open("credentials.json", "r") as f:
-    credentials = json.load(f)
+# Authenticate using any Linkedin account credentials
+api = Linkedin('tefora4664@wenkuu.com', 'Testing@123')
 
-if credentials:
-    linkedin = Linkedin(credentials["username"], credentials["password"])
+# GET a profile
+profile = api.get_profile('billy-g')
 
-    profile = linkedin.get_profile("ACoAABQ11fIBQLGQbB1V1XPBZJsRwfK5r1U2Rzw")
-    profile["contact_info"] = linkedin.get_profile_contact_info(
-        "ACoAABQ11fIBQLGQbB1V1XPBZJsRwfK5r1U2Rzw"
-    )
-    connections = linkedin.get_profile_connections(profile["profile_id"])
+# GET a profiles contact info
+contact_info = api.get_profile_contact_info('billy-g')
+
+# GET 1st degree connections of a given profile
+connections = api.get_profile_connections('1234asc12304')
+
+print(profile)
